@@ -27,3 +27,8 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+## Example
+
+The *clock-angle* can be viewed at [NNM Clock angle](https://anders.nemonisimors.com/projects/clockAngle).
