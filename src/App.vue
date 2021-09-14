@@ -1,11 +1,19 @@
 <template>
-  <h1>
-    NNM Clock angle <small class="meta">{{ vueAppVersion }}</small>
-  </h1>
+
+  <header>
+    <div>
+      <a href="./">
+        <img src="/favicon-clock.svg" alt="Favicon for NNM Clock angle" width="32" height="32" />
+      </a>
+    </div>
+
+    NNM Clock angle
+    <small class="meta">{{ vueAppVersion }}</small>
+  </header>
 
   <ClockAngle/>
 
-  <h2>About</h2>
+  <h1>About</h1>
 
   <p>
     Animation of <em>clock angles</em> in an analog clock, using the <a href="https://anders.nemonisimors.com/currentTime.php">current Zulu time</a>. You can control the animation by the checkboxes at the top.
@@ -85,7 +93,13 @@ body {
   max-width: 840px;
 }
 
-h2 {
+header {
+  margin: 1rem 0;
+  font-size: 2.0em;
+  font-weight: bold;
+}
+
+h1 {
   margin-top: 2.5rem;
 }
 

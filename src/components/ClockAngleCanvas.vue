@@ -83,7 +83,9 @@ export default defineComponent({
 
         drawHourHand(state);
         drawMinuteHand(state);
-        drawSecondHand(state);
+        if (props.settings.showSecondHand) {
+          drawSecondHand(state);
+        }
       }
 
       function drawAngleStarter() {
@@ -280,7 +282,9 @@ export default defineComponent({
       }
 
       function drawAngles(state: State) {
-        drawAngle(state.secondHand.angleRad, 60, colorSecondHand);
+        if (props.settings.showSecondHand) {
+          drawAngle(state.secondHand.angleRad, 60, colorSecondHand);
+        }
         drawAngle(state.minuteHand.angleRad, 40, colorMinuteHand);
         drawAngle(state.hourHand.angleRad, 20, colorHourHand);
       }

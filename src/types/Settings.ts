@@ -6,4 +6,5 @@ export interface Settings {
     smoothSecondHand: boolean;
     smoothMinuteHand: boolean;
     smoothHourHand: boolean;
+    showSecondHand: boolean;
 }

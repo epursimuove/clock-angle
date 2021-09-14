@@ -52,6 +52,13 @@
         </label>
       </div>
 
+      <div>
+        <input id="showSecondHand" type="checkbox" v-model="showSecondHand"/>
+        <label for="showSecondHand">
+          Showing second hand
+        </label>
+      </div>
+
     </div>
 
     <ClockAngleCanvas
@@ -60,7 +67,12 @@
 
     <div class="current-state">
       <div class="math color-angle-seconds">
-        {{ angleSeconds }}
+        <div v-if="settings.showSecondHand">
+          {{ angleSeconds }}
+        </div>
+        <div v-else>
+          &nbsp;
+        </div>
       </div>
 
       <div class="math color-angle-minutes">
@@ -97,6 +109,7 @@ export default defineComponent({
     const smoothSecondHand = ref(false);
     const smoothMinuteHand = ref(false);
     const smoothHourHand = ref(false);
+    const showSecondHand = ref(true);
 
     let lastHandledTimestamp = 0;
 
@@ -107,6 +120,7 @@ export default defineComponent({
       smoothSecondHand,
       smoothMinuteHand,
       smoothHourHand,
+      showSecondHand,
       showDigitalClock: showingDigitalClock,
     });
 
@@ -195,7 +209,7 @@ export default defineComponent({
       return state;
     }
 
-    const state = ref(calculateState());
+    const state = ref(calculateState() as State);
 
     function updateLoop(timestamp: number) {
       window.requestAnimationFrame(updateLoop);
@@ -227,6 +241,7 @@ export default defineComponent({
       smoothSecondHand,
       smoothMinuteHand,
       smoothHourHand,
+      showSecondHand,
 
       angleSeconds,
       angleMinutes,
