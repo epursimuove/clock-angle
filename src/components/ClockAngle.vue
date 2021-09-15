@@ -59,6 +59,13 @@
         </label>
       </div>
 
+      <div>
+        <input id="showHands" type="checkbox" v-model="showHands"/>
+        <label for="showHands">
+          Showing hands
+        </label>
+      </div>
+
     </div>
 
     <ClockAngleCanvas
@@ -110,6 +117,7 @@ export default defineComponent({
     const smoothMinuteHand = ref(false);
     const smoothHourHand = ref(false);
     const showSecondHand = ref(true);
+    const showHands = ref(true);
 
     let lastHandledTimestamp = 0;
 
@@ -121,6 +129,7 @@ export default defineComponent({
       smoothMinuteHand,
       smoothHourHand,
       showSecondHand,
+      showHands,
       showDigitalClock: showingDigitalClock,
     });
 
@@ -242,6 +251,7 @@ export default defineComponent({
       smoothMinuteHand,
       smoothHourHand,
       showSecondHand,
+      showHands,
 
       angleSeconds,
       angleMinutes,

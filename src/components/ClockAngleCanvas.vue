@@ -81,10 +81,12 @@ export default defineComponent({
           drawAngles(state);
         }
 
-        drawHourHand(state);
-        drawMinuteHand(state);
-        if (props.settings.showSecondHand) {
-          drawSecondHand(state);
+        if (props.settings.showHands) {
+          drawHourHand(state);
+          drawMinuteHand(state);
+          if (props.settings.showSecondHand) {
+            drawSecondHand(state);
+          }
         }
       }
 
