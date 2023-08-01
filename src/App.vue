@@ -1,3 +1,28 @@
+<script setup lang="ts">
+import {version} from "vue";
+import ClockAngle from "@/components/ClockAngle.vue";
+import {name as appName, version as appVersion} from "../package.json";
+
+console.group("Starting up application...");
+
+console.info("Vue version", version);
+
+// const vueAppName = "# TODO #"; //process.env.VUE_APP_NAME;
+// const vueAppName = import.meta.env.VITE_VUE_APP_NAME;
+const vueAppName = appName;
+// const vueAppVersion = import.meta.env.VITE_VUE_APP_VERSION;
+const vueAppVersion = appVersion;
+console.info("App", vueAppName, vueAppVersion);
+
+// const typescriptVersion = "# TODO #"; //process.env.VUE_APP_TYPESCRIPT_VERSION;
+// const typescriptVersion = import.meta.env.VITE_TYPESCRIPT_VERSION;
+const typescriptVersion = "5.1.6"; // TODO How to make this value dynamic from actual pnpm-lock.yaml file?
+// console.info("TypeScript version", typescriptVersion);
+
+console.info("All engines started");
+console.groupEnd();
+</script>
+
 <template>
 
   <header>
@@ -24,7 +49,7 @@
   </p>
 
   <p>
-    First version created in June 2021. Implemented with the help of <a href="https://v3.vuejs.org">Vue</a> <var>{{ version }}</var> and <a href="https://www.typescriptlang.org">TypeScript</a> <var>{{ typescriptVersion }}</var>.
+    First version created in June 2021. Second version implemented in July 2023. Implemented with the help of <a href="https://vuejs.org">Vue</a> <var>{{ version }}</var> and <a href="https://www.typescriptlang.org">TypeScript</a><!-- <var>{{ typescriptVersion }}</var>-->.
   </p>
 
   <footer>
@@ -45,46 +70,7 @@
 
 </template>
 
-<script lang="ts">
-import { defineComponent, version } from "vue";
-import ClockAngle from "@/components/ClockAngle.vue";
-
-export default defineComponent({
-  name: "App",
-
-  components: {
-    ClockAngle,
-  },
-
-  setup() {
-    console.group("Starting up application...");
-
-    console.info("Vue version", version);
-
-    const vueAppName = process.env.VUE_APP_NAME;
-    const vueAppVersion = process.env.VUE_APP_VERSION;
-    console.info("App", vueAppName, vueAppVersion);
-
-    const typescriptVersion = process.env.VUE_APP_TYPESCRIPT_VERSION;
-    console.info("TypeScript version", typescriptVersion);
-
-    console.info("All engines started");
-    console.groupEnd();
-
-    return {
-      version,
-      vueAppVersion,
-      typescriptVersion
-    };
-  }
-
-});
-</script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-}
+<style scoped>
 
 body {
   margin: 0 1rem;
@@ -124,5 +110,4 @@ footer {
 .meta {
   color: hsl(100, 0%, 60%);
 }
-
 </style>

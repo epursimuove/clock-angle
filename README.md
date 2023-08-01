@@ -1,34 +1,39 @@
 # clock-angle
 
-## Project setup
-```
-npm install
+## Customize configuration
+
+See [Vite Configuration Reference](https://vitejs.dev/config/).
+
+## Project Setup
+
+Using [pnpm](https://pnpm.io) as package manager.
+
+```sh
+pnpm install
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
+### Compile and Hot-Reload for Development
+
+```sh
+pnpm dev
 ```
 
-### Compiles and minifies for production
-```
-npm run build
+### Type-Check, Compile and Minify for Production
+
+```sh
+pnpm build
 ```
 
-### Run your unit tests
-```
-npm run test:unit
-```
+### Run Unit Tests with [Vitest](https://vitest.dev/)
 
-### Lints and fixes files
-```
-npm run lint
+```sh
+pnpm test:unit
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Lint with [ESLint](https://eslint.org/)
 
-
-## Example
+```sh
+pnpm lint
+```
 
 The *clock-angle* can be viewed at [NNM Clock angle](https://anders.nemonisimors.com/projects/clockAngle).
