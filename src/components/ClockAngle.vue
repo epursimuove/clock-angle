@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {computed, onMounted, reactive, ref} from "vue";
+import { computed, onMounted, reactive, ref } from "vue";
 import ClockAngleCanvas from "@/components/ClockAngleCanvas.vue";
-import type {State} from "@/types/types";
+import type { State } from "@/types/types";
 
 const faceWithNumbers = ref(true);
 const showingAngles = ref(true);
@@ -27,11 +27,7 @@ const settings = reactive({
   showDigitalClock: showingDigitalClock,
 });
 
-const padDegreeAndFixed = (
-    degrees: number,
-    maxLength: number,
-    decimals = 2
-) => {
+const padDegreeAndFixed = (degrees: number, maxLength: number, decimals = 2) => {
   return degrees.toFixed(decimals).padStart(maxLength);
 };
 
@@ -41,11 +37,17 @@ const formatDegrees = (label: string, degrees: number, smooth: boolean) => {
   return `${label}: ${padDegreeAndFixed(degrees, maxLength)}° (${metaText})`;
 };
 
-const angleSeconds = computed(() => formatDegrees("Angle seconds", state.value.secondHand.angleDeg, settings.smoothSecondHand));
+const angleSeconds = computed(() =>
+  formatDegrees("Angle seconds", state.value.secondHand.angleDeg, settings.smoothSecondHand),
+);
 
-const angleMinutes = computed(() => formatDegrees("Angle minutes", state.value.minuteHand.angleDeg, settings.smoothMinuteHand));
+const angleMinutes = computed(() =>
+  formatDegrees("Angle minutes", state.value.minuteHand.angleDeg, settings.smoothMinuteHand),
+);
 
-const angleHours = computed(() => formatDegrees("Angle hours", state.value.hourHand.angleDeg, settings.smoothHourHand));
+const angleHours = computed(() =>
+  formatDegrees("Angle hours", state.value.hourHand.angleDeg, settings.smoothHourHand),
+);
 
 onMounted(() => {
   // console.log("onMounted");
@@ -54,59 +56,55 @@ onMounted(() => {
 });
 
 function calculateState(): State {
-
   const now = new Date();
   const hours = now.getUTCHours();
   const minutes = now.getUTCMinutes();
   const seconds = now.getUTCSeconds();
   const ms = now.getUTCMilliseconds();
 
-  const angleSecondsDeg = smoothSecondHand.value
-      ? 6 * (seconds + ms / 1000)
-      : 6 * seconds;
+  const angleSecondsDeg = smoothSecondHand.value ? 6 * (seconds + ms / 1000) : 6 * seconds;
 
   const angleMinutesDeg = smoothMinuteHand.value
-      ? 6 * (minutes + seconds / 60 + ms / (60 * 1000))
-      : 6 * minutes;
+    ? 6 * (minutes + seconds / 60 + ms / (60 * 1000))
+    : 6 * minutes;
 
   let angleHoursDeg = null;
 
   if (!twentyFourHours.value) {
     // Modulo 12 since we have a 12-hour clock and not a 24-hour clock.
     angleHoursDeg = smoothHourHand.value
-        ? (60 * (hours % 12) + minutes + seconds / 60 + ms / (60 * 1000)) / 2
-        : (60 * (hours % 12) + minutes) / 2;
-
+      ? (60 * (hours % 12) + minutes + seconds / 60 + ms / (60 * 1000)) / 2
+      : (60 * (hours % 12) + minutes) / 2;
   } else {
     angleHoursDeg = smoothHourHand.value
-        ? (60 * hours + minutes + seconds / 60 + ms / (60 * 1000)) / 4
-        : (60 * hours + minutes) / 4;
+      ? (60 * hours + minutes + seconds / 60 + ms / (60 * 1000)) / 4
+      : (60 * hours + minutes) / 4;
   }
 
-  const angleSecondsRad = (angleSecondsDeg - 90) * Math.PI / 180;
+  const angleSecondsRad = ((angleSecondsDeg - 90) * Math.PI) / 180;
 
-  const angleMinutesRad = (angleMinutesDeg - 90) * Math.PI / 180;
+  const angleMinutesRad = ((angleMinutesDeg - 90) * Math.PI) / 180;
 
-  const angleHoursRad = (angleHoursDeg - 90) * Math.PI / 180;
+  const angleHoursRad = ((angleHoursDeg - 90) * Math.PI) / 180;
 
   const state = {
     time: {
       hours: hours,
       minutes: minutes,
-      seconds: seconds
+      seconds: seconds,
     },
     secondHand: {
       angleDeg: angleSecondsDeg,
-      angleRad: angleSecondsRad
+      angleRad: angleSecondsRad,
     },
     minuteHand: {
       angleDeg: angleMinutesDeg,
-      angleRad: angleMinutesRad
+      angleRad: angleMinutesRad,
     },
     hourHand: {
       angleDeg: angleHoursDeg,
-      angleRad: angleHoursRad
-    }
+      angleRad: angleHoursRad,
+    },
   } as State;
 
   return state;
@@ -135,91 +133,65 @@ const init = () => {
   console.log("Component up and running");
   console.groupEnd();
 };
-
 </script>
 
 <template>
-
   <div class="clock-angle">
-
     <div class="settings">
       <div>
-        <input id="faceWithNumbers" type="checkbox" v-model="faceWithNumbers"/>
-        <label for="faceWithNumbers">
-          Face with numbers
-        </label>
+        <input id="faceWithNumbers" type="checkbox" v-model="faceWithNumbers" />
+        <label for="faceWithNumbers"> Face with numbers </label>
       </div>
 
       <div>
-        <input id="showingAngles" type="checkbox" v-model="showingAngles"/>
-        <label for="showingAngles">
-          Showing angles
-        </label>
+        <input id="showingAngles" type="checkbox" v-model="showingAngles" />
+        <label for="showingAngles"> Showing angles </label>
       </div>
 
       <div>
-        <input id="showingDigitalClock" type="checkbox" v-model="showingDigitalClock"/>
-        <label for="showingDigitalClock">
-          Showing digital clock
-        </label>
+        <input id="showingDigitalClock" type="checkbox" v-model="showingDigitalClock" />
+        <label for="showingDigitalClock"> Showing digital clock </label>
       </div>
 
       <div>
-        <input id="twentyFourHours" type="checkbox" v-model="twentyFourHours"/>
-        <label for="twentyFourHours">
-          24-hour analog dial
-        </label>
+        <input id="twentyFourHours" type="checkbox" v-model="twentyFourHours" />
+        <label for="twentyFourHours"> 24-hour analog dial </label>
       </div>
 
       <div>
-        <input id="smoothSecondHand" type="checkbox" v-model="smoothSecondHand"/>
-        <label for="smoothSecondHand">
-          Smooth second hand
-        </label>
+        <input id="smoothSecondHand" type="checkbox" v-model="smoothSecondHand" />
+        <label for="smoothSecondHand"> Smooth second hand </label>
       </div>
 
       <div>
-        <input id="smoothMinuteHand" type="checkbox" v-model="smoothMinuteHand"/>
-        <label for="smoothMinuteHand">
-          Smooth minute hand
-        </label>
+        <input id="smoothMinuteHand" type="checkbox" v-model="smoothMinuteHand" />
+        <label for="smoothMinuteHand"> Smooth minute hand </label>
       </div>
 
       <div>
-        <input id="smoothHourHand" type="checkbox" v-model="smoothHourHand"/>
-        <label for="smoothHourHand">
-          Smooth hour hand
-        </label>
+        <input id="smoothHourHand" type="checkbox" v-model="smoothHourHand" />
+        <label for="smoothHourHand"> Smooth hour hand </label>
       </div>
 
       <div>
-        <input id="showSecondHand" type="checkbox" v-model="showSecondHand"/>
-        <label for="showSecondHand">
-          Showing second hand
-        </label>
+        <input id="showSecondHand" type="checkbox" v-model="showSecondHand" />
+        <label for="showSecondHand"> Showing second hand </label>
       </div>
 
       <div>
-        <input id="showHands" type="checkbox" v-model="showHands"/>
-        <label for="showHands">
-          Showing hands
-        </label>
+        <input id="showHands" type="checkbox" v-model="showHands" />
+        <label for="showHands"> Showing hands </label>
       </div>
-
     </div>
 
-    <ClockAngleCanvas
-        :settings="settings"
-        :state="state"/>
+    <ClockAngleCanvas :settings="settings" :state="state" />
 
     <div class="current-state">
       <div class="math color-angle-seconds">
         <div v-if="settings.showSecondHand">
           {{ angleSeconds }}
         </div>
-        <div v-else>
-          &nbsp;
-        </div>
+        <div v-else>&nbsp;</div>
       </div>
 
       <div class="math color-angle-minutes">
@@ -229,16 +201,13 @@ const init = () => {
       <div class="math color-angle-hours">
         {{ angleHours }}
       </div>
-
     </div>
-
   </div>
-
 </template>
 
 <style scoped>
-
-.settings, .current-state {
+.settings,
+.current-state {
   /*max-width: 50rem;*/
   display: flex;
   flex-direction: column;
@@ -271,5 +240,4 @@ const init = () => {
 .color-angle-hours {
   color: #00a;
 }
-
 </style>

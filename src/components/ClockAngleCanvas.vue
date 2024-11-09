@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type {Coordinates, Settings, State} from "@/types/types";
-import {onMounted, watch} from "vue";
+import type { Coordinates, Settings, State } from "@/types/types";
+import { onMounted, watch } from "vue";
 
 const props = defineProps<{
   settings: Settings;
@@ -35,9 +35,7 @@ onMounted(() => {
 const init = () => {
   console.group("Initializing Clock Angle canvas component");
 
-  const canvasClockAngle = document.getElementById(
-      "canvasClockAngle"
-  ) as HTMLCanvasElement;
+  const canvasClockAngle = document.getElementById("canvasClockAngle") as HTMLCanvasElement;
   const canvasWidth = canvasClockAngle?.width;
   const canvasHeight = canvasClockAngle?.height;
   let cx: CanvasRenderingContext2D;
@@ -53,7 +51,6 @@ const init = () => {
   }
 
   function drawDynamicContent(state: State) {
-
     addTexts(state);
 
     if (props.settings.showAngles) {
@@ -145,7 +142,7 @@ const init = () => {
     let minuteValue = 0;
 
     for (let angleDeg = 0; angleDeg < 360; angleDeg += stepInDegrees) {
-      const angleRad = (angleDeg - 90) * Math.PI / 180;
+      const angleRad = ((angleDeg - 90) * Math.PI) / 180;
 
       // const thickness = angleDeg % 90 === 0 ? 3 : 2;
       const thickness = angleDeg % (stepInDegrees * 3) === 0 ? 3 : 2;
@@ -163,20 +160,20 @@ const init = () => {
       const coordinates = {
         outer: {
           x: xOuter,
-          y: yOuter
+          y: yOuter,
         },
         inner: {
           x: xInner,
-          y: yInner
+          y: yInner,
         },
         numberHourCenter: {
           x: xNumberHourCenter,
-          y: yNumberHourCenter
+          y: yNumberHourCenter,
         },
         numberMinuteCenter: {
           x: xNumberMinuteCenter,
-          y: yNumberMinuteCenter
-        }
+          y: yNumberMinuteCenter,
+        },
       };
 
       if (props.settings.faceWithNumbers) {
@@ -195,11 +192,7 @@ const init = () => {
     }
   }
 
-  function drawMarker(
-      coordinates: Coordinates,
-      thickness: number,
-      color: string
-  ) {
+  function drawMarker(coordinates: Coordinates, thickness: number, color: string) {
     cx.strokeStyle = color;
     cx.lineWidth = thickness === 3 ? 11.0 : thickness === 2 ? 7.0 : 1.0;
     cx.setLineDash([]);
@@ -214,7 +207,6 @@ const init = () => {
   }
 
   function drawHourNumbers(hourValue: number, coordinates: Coordinates) {
-
     if (coordinates.numberHourCenter) {
       cx.textAlign = "center";
       cx.textBaseline = "middle";
@@ -222,15 +214,14 @@ const init = () => {
       cx.font = "20px 'Courier New'";
 
       cx.fillText(
-          hourValue.toString(),
-          coordinates.numberHourCenter.x,
-          coordinates.numberHourCenter.y
+        hourValue.toString(),
+        coordinates.numberHourCenter.x,
+        coordinates.numberHourCenter.y,
       );
     }
   }
 
   function drawMinuteNumbers(minuteValue: number, coordinates: Coordinates) {
-
     if (coordinates.numberMinuteCenter) {
       cx.textAlign = "center";
       cx.textBaseline = "middle";
@@ -238,15 +229,14 @@ const init = () => {
       cx.font = "12px 'Courier New'";
 
       cx.fillText(
-          minuteValue.toString(),
-          coordinates.numberMinuteCenter.x,
-          coordinates.numberMinuteCenter.y
+        minuteValue.toString(),
+        coordinates.numberMinuteCenter.x,
+        coordinates.numberMinuteCenter.y,
       );
     }
   }
 
   function addTexts(state: State) {
-
     if (props.settings.showDigitalClock) {
       cx.textAlign = "center";
       cx.fillStyle = colorText;
@@ -270,17 +260,20 @@ const init = () => {
     drawAngle(state.hourHand.angleRad, 20, colorHourHand);
   }
 
-  function drawAngle(
-      angleRad: number,
-      distanceFromInnerCircle: number,
-      color: string
-  ) {
+  function drawAngle(angleRad: number, distanceFromInnerCircle: number, color: string) {
     cx.strokeStyle = color;
     cx.lineWidth = 3.0;
     cx.setLineDash([]);
 
     cx.beginPath();
-    cx.arc(origoX, origoY, radiusInnerCircle + distanceFromInnerCircle, -Math.PI / 2, angleRad, false);
+    cx.arc(
+      origoX,
+      origoY,
+      radiusInnerCircle + distanceFromInnerCircle,
+      -Math.PI / 2,
+      angleRad,
+      false,
+    );
     cx.stroke();
   }
 
@@ -348,13 +341,15 @@ const init = () => {
     cx.clearRect(0, 0, canvasWidth, canvasHeight);
   }
 
-  watch(() => props.state,
-      (state, previousState) => {
-        // console.log('state', state);
-        clearCanvas();
-        drawStaticContent(state);
-        drawDynamicContent(state);
-      });
+  watch(
+    () => props.state,
+    (state, previousState) => {
+      // console.log('state', state);
+      clearCanvas();
+      drawStaticContent(state);
+      drawDynamicContent(state);
+    },
+  );
 
   if (typeof canvasClockAngle?.getContext !== "undefined") {
     cx = canvasClockAngle?.getContext("2d") as CanvasRenderingContext2D;
@@ -364,22 +359,17 @@ const init = () => {
     console.groupEnd();
   }
 };
-
-
 </script>
 
 <template>
-
   <div>
     <div class="canvas-wrapper">
       <canvas id="canvasClockAngle" width="500" height="500" />
     </div>
   </div>
-
 </template>
 
 <style scoped>
-
 .canvas-wrapper {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -389,5 +379,4 @@ canvas {
   /*border: 1px solid lightgray;*/
   max-width: 100%;
 }
-
 </style>

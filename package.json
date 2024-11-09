@@ -1,8 +1,9 @@
 {
   "name": "clock-angle",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Animation of clock angles in an analog clock",
   "private": true,
+  "type": "module",
   "packageManager": "pnpm@8.6.10",
   "author": "Anders Gustafson",
   "scripts": {
@@ -16,26 +17,26 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "vue": "^3.3.4"
+    "vue": "^3.5.12"
   },
   "devDependencies": {
-    "@rushstack/eslint-patch": "^1.3.3",
-    "@tsconfig/node18": "^18.2.1",
-    "@types/jsdom": "^21.1.2",
-    "@types/node": "^20.5.8",
-    "@vitejs/plugin-vue": "^4.3.4",
-    "@vue/eslint-config-prettier": "^8.0.0",
-    "@vue/eslint-config-typescript": "^11.0.3",
-    "@vue/test-utils": "^2.4.1",
-    "@vue/tsconfig": "^0.4.0",
-    "eslint": "^8.48.0",
-    "eslint-plugin-vue": "^9.17.0",
-    "jsdom": "^22.1.0",
+    "@rushstack/eslint-patch": "^1.10.4",
+    "@tsconfig/node18": "^18.2.4",
+    "@types/jsdom": "^21.1.7",
+    "@types/node": "^22.9.0",
+    "@vitejs/plugin-vue": "^5.1.4",
+    "@vue/eslint-config-prettier": "^10.1.0",
+    "@vue/eslint-config-typescript": "^14.1.3",
+    "@vue/test-utils": "^2.4.6",
+    "@vue/tsconfig": "^0.5.1",
+    "eslint": "^9.14.0",
+    "eslint-plugin-vue": "^9.30.0",
+    "jsdom": "^25.0.1",
     "npm-run-all": "^4.1.5",
-    "prettier": "^3.0.3",
-    "typescript": "^5.2.2",
-    "vite": "^4.4.9",
-    "vitest": "^0.34.3",
-    "vue-tsc": "^1.8.8"
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10",
+    "vitest": "^2.1.4",
+    "vue-tsc": "^2.1.10"
   }
 }

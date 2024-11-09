@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {version} from "vue";
+import { version } from "vue";
 import ClockAngle from "@/components/ClockAngle.vue";
-import {name as appName, version as appVersion} from "../package.json";
+import { name as appName, version as appVersion } from "../package.json";
 
 console.group("Starting up application...");
 
@@ -24,7 +24,6 @@ console.groupEnd();
 </script>
 
 <template>
-
   <header>
     <div>
       <a href="./">
@@ -36,20 +35,27 @@ console.groupEnd();
     <small class="meta">{{ vueAppVersion }}</small>
   </header>
 
-  <ClockAngle/>
+  <ClockAngle />
 
   <h1>About</h1>
 
   <p>
-    Animation of <em>clock angles</em> in an analog clock, using the <a href="https://anders.nemonisimors.com/currentTime.php">current Zulu time</a>. You can control the animation by the checkboxes at the top.
+    Animation of <em>clock angles</em> in an analog clock, using the
+    <a href="https://anders.nemonisimors.com/currentTime.php">current Zulu time</a>. You can control
+    the animation by the checkboxes at the top.
   </p>
 
   <p>
-    This is an enhancement of the <a href="https://anders.nemonisimors.com/clockAngle.php">original clock angle</a>. Complete documentation and theory can be found on the original page.
+    This is an enhancement of the
+    <a href="https://anders.nemonisimors.com/clockAngle.php">original clock angle</a>. Complete
+    documentation and theory can be found on the original page.
   </p>
 
   <p>
-    First version created in June 2021. Second version implemented in July 2023. Implemented with the help of <a href="https://vuejs.org">Vue</a> <var>{{ version }}</var> and <a href="https://www.typescriptlang.org">TypeScript</a><!-- <var>{{ typescriptVersion }}</var>-->.
+    First version created in June 2021. Second version implemented in July 2023. Implemented with
+    the help of <a href="https://vuejs.org">Vue</a> <var>{{ version }}</var> and
+    <a href="https://www.typescriptlang.org">TypeScript</a
+    ><!-- <var>{{ typescriptVersion }}</var>-->.
   </p>
 
   <footer>
@@ -57,7 +63,10 @@ console.groupEnd();
       <em>NNM Clock angle</em> <small>{{ vueAppVersion }}</small>
     </div>
     <div>
-      Code repository: <a href="https://github.com/epursimuove/clock-angle">https://github.com/epursimuove/clock-angle</a>
+      Code repository:
+      <a href="https://github.com/epursimuove/clock-angle"
+        >https://github.com/epursimuove/clock-angle</a
+      >
     </div>
     <div>
       Copyright &copy; 2021-&infin;
@@ -67,11 +76,9 @@ console.groupEnd();
       <a href="https://www.nemonisimors.com"><em>Nemo nisi mors</em></a>
     </div>
   </footer>
-
 </template>
 
 <style scoped>
-
 body {
   margin: 0 1rem;
   /*background-color: black;*/
@@ -81,7 +88,7 @@ body {
 
 header {
   margin: 1rem 0;
-  font-size: 2.0em;
+  font-size: 2em;
   font-weight: bold;
 }
 
