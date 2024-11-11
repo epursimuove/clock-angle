@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { version } from "vue";
 import ClockAngle from "@/components/ClockAngle.vue";
-import { name as appName, version as appVersion } from "../package.json";
+import { name as appName, version as appVersion, devDependencies } from "../package.json";
+import {version as typescriptVersion2} from "../node_modules/typescript/package.json";
 
 console.group("Starting up application...");
 
@@ -16,8 +17,12 @@ console.info("App", vueAppName, vueAppVersion);
 
 // const typescriptVersion = "# TODO #"; //process.env.VUE_APP_TYPESCRIPT_VERSION;
 // const typescriptVersion = import.meta.env.VITE_TYPESCRIPT_VERSION;
-const typescriptVersion = "5.1.6"; // TODO How to make this value dynamic from actual pnpm-lock.yaml file?
+// const typescriptVersion = "5.1.6"; // TODO How to make this value dynamic from actual pnpm-lock.yaml file?
+// const typescriptVersion = devDependencies.typescript;
 // console.info("TypeScript version", typescriptVersion);
+console.info("TypeScript version", typescriptVersion2);
+
+const currentYear: number = new Date().getFullYear();
 
 console.info("All engines started");
 console.groupEnd();
@@ -32,7 +37,7 @@ console.groupEnd();
     </div>
 
     NNM Clock angle
-    <small class="meta">{{ vueAppVersion }}</small>
+    <var class="meta">{{ vueAppVersion }}</var>
   </header>
 
   <ClockAngle />
@@ -41,26 +46,25 @@ console.groupEnd();
 
   <p>
     Animation of <em>clock angles</em> in an analog clock, using the
-    <a href="https://anders.nemonisimors.com/currentTime.php">current Zulu time</a>. You can control
+    <a href="https://anders.nemonisimors.com/currentTime">current Zulu time</a>. You can control
     the animation by the checkboxes at the top.
   </p>
 
   <p>
     This is an enhancement of the
-    <a href="https://anders.nemonisimors.com/clockAngle.php">original clock angle</a>. Complete
+    <a href="https://anders.nemonisimors.com/clockAngle">original clock angle</a>. Complete
     documentation and theory can be found on the original page.
   </p>
 
   <p>
     First version created in June 2021. Second version implemented in July 2023. Implemented with
     the help of <a href="https://vuejs.org">Vue</a> <var>{{ version }}</var> and
-    <a href="https://www.typescriptlang.org">TypeScript</a
-    ><!-- <var>{{ typescriptVersion }}</var>-->.
+    <a href="https://www.typescriptlang.org">TypeScript</a> <var>{{ typescriptVersion2 }}</var>.
   </p>
 
   <footer>
     <div>
-      <em>NNM Clock angle</em> <small>{{ vueAppVersion }}</small>
+      <em>NNM Clock angle</em> <var>{{ vueAppVersion }}</var>
     </div>
     <div>
       Code repository:
@@ -69,7 +73,7 @@ console.groupEnd();
       >
     </div>
     <div>
-      Copyright &copy; 2021-&infin;
+      Copyright &copy; 2021-{{ currentYear }}
       <a href="https://anders.nemonisimors.com">Anders Gustafson</a>
     </div>
     <div>
